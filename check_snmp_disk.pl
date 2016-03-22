@@ -174,6 +174,10 @@ foreach my $key (keys(%$result)) {
 # based on the include and exlude options
 foreach my $key (keys(%disks)) {
   my $path = $disks{$key}{path};
+  # Fix path variable to work with Windows machines
+  if ($path =~ /([A-Z]:.*|Physical Memory|Virtual Memory)/) {
+    $path = $key;
+  }
   if(@opt_include) {
     my $is_included = 0;
     foreach my $include (@opt_include) {
